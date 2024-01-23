@@ -1,0 +1,28 @@
+﻿name: Build
+
+on:
+  push:
+    branches-ignore:
+      - '*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.0
+
+    - name: Build Software
+      run: |
+        msbuild /p:Configuration=Release /m
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: software-artifact
+        path: ./path/to/your/software/bin/Release

@@ -40,7 +40,7 @@ namespace Steamless.Model.Tasks
         /// </summary>
         public LoadPluginsTask()
         {
-            this.Text = "Loading plugins...";
+            this.Text = "正在加载插件...";
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Steamless.Model.Tasks
                         {
                             Application.Current.Dispatcher.Invoke(() =>
                                 {
-                                    vml.LoggingService.OnAddLogMessage(this, new LogMessageEventArgs($"Loaded plugin: {p.Name} - by {p.Author} (v.{p.Version})", LogMessageType.Success));
+                                    vml.LoggingService.OnAddLogMessage(this, new LogMessageEventArgs($"已加载插件: {p.Name} - by {p.Author} (v.{p.Version})", LogMessageType.Success));
                                 });
                         });
 

@@ -52,12 +52,12 @@ namespace Steamless.Model
         /// <summary>
         /// Gets the name of this plugin.
         /// </summary>
-        public override string Name => "Automatic";
+        public override string Name => "自动";
 
         /// <summary>
         /// Gets the description of this plugin.
         /// </summary>
-        public override string Description => "Automatically finds which plugin to use for the given file.";
+        public override string Description => "查找特定文件自动使用插件。";
 
         /// <summary>
         /// Gets the version of this plugin.
@@ -137,8 +137,8 @@ namespace Steamless.Model
                     if (!f.HasSection(".bind"))
                     {
                         this.Log("", LogMessageType.Error);
-                        this.Log("This file does not appear to be packed with SteamStub!", LogMessageType.Error);
-                        this.Log("File missing expected '.bind' section!", LogMessageType.Error);
+                        this.Log("该文件似乎没有用 SteamStub 打包！", LogMessageType.Error);
+                        this.Log("文件缺少预期的“.bind”部分！", LogMessageType.Error);
                         this.Log("", LogMessageType.Error);
                         return false;
                     }
@@ -146,13 +146,13 @@ namespace Steamless.Model
                 else
                 {
                     this.Log("", LogMessageType.Error);
-                    this.Log("This file does not appear to be a valid Win32 PE file. Cannot unpack!", LogMessageType.Error);
+                    this.Log("此文件似乎不是有效的 Win32 PE 文件。无法解包！", LogMessageType.Error);
                     this.Log("", LogMessageType.Error);
                 }
             }
             catch (Exception e)
             {
-                this.Log("Failed to parse or unpack the selected file due to an exception:", LogMessageType.Error);
+                this.Log("由于异常，无法解包所选文件：", LogMessageType.Error);
                 this.Log("", LogMessageType.Error);
                 this.Log(e.Message, LogMessageType.Error);
             }

@@ -48,12 +48,12 @@ namespace ExamplePlugin
         /// <summary>
         /// Gets the name of this plugin.
         /// </summary>
-        public override string Name => "Example Plugin";
+        public override string Name => "示例插件";
 
         /// <summary>
         /// Gets the description of this plugin.
         /// </summary>
-        public override string Description => "A simple plugin example.";
+        public override string Description => "一个简单的插件示例。";
 
         /// <summary>
         /// Gets the version of this plugin.
@@ -68,7 +68,7 @@ namespace ExamplePlugin
         public override bool Initialize(LoggingService logService)
         {
             this.m_LoggingService = logService;
-            this.m_LoggingService.OnAddLogMessage(this, new LogMessageEventArgs("ExamplePlugin was initialized!", LogMessageType.Debug));
+            this.m_LoggingService.OnAddLogMessage(this, new LogMessageEventArgs("示例插件已初始化！", LogMessageType.Debug));
 
             return true;
         }
@@ -81,7 +81,7 @@ namespace ExamplePlugin
         /// <returns></returns>
         public override bool CanProcessFile(string file)
         {
-            this.m_LoggingService.OnAddLogMessage(this, new LogMessageEventArgs("ExamplePlugin was asked to check if it can process a file!", LogMessageType.Debug));
+            this.m_LoggingService.OnAddLogMessage(this, new LogMessageEventArgs("ExamplePlugin 被要求检查它是否可以处理文件！", LogMessageType.Debug));
 
             return false;
         }
@@ -94,7 +94,7 @@ namespace ExamplePlugin
         /// <returns></returns>
         public override bool ProcessFile(string file, SteamlessOptions options)
         {
-            this.m_LoggingService.OnAddLogMessage(this, new LogMessageEventArgs("ExamplePlugin was asked to process a file!", LogMessageType.Debug));
+            this.m_LoggingService.OnAddLogMessage(this, new LogMessageEventArgs("ExamplePlugin 被要求处理一个文件！", LogMessageType.Debug));
 
             return false;
         }

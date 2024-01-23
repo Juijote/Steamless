@@ -95,6 +95,7 @@ namespace Steamless.ViewModel
 
             this.AddLogMessage(this, new LogMessageEventArgs("Steamless (c) 2015 - 2023 atom0s [atom0s@live.com]", LogMessageType.Debug));
             this.AddLogMessage(this, new LogMessageEventArgs("Website: http://atom0s.com/", LogMessageType.Debug));
+            this.AddLogMessage(this, new LogMessageEventArgs("汉化更新: https://juij.eu.org/#Steamless", LogMessageType.Debug));
 
             // Initialize this model..
             this.Initialize();
@@ -106,7 +107,7 @@ namespace Steamless.ViewModel
         private async void Initialize()
         {
             // Obtain the Steamless version..
-            this.CurrentTask = new StatusTask("Initializing..");
+            this.CurrentTask = new StatusTask("正在初始化...");
             this.SteamlessVersion = await this.m_DataService.GetSteamlessVersion();
 
             // Load the Steamless plugins..
@@ -314,18 +315,18 @@ namespace Steamless.ViewModel
                     // Select the plugin..
                     var plugin = this.Plugins[this.SelectedPluginIndex];
                     if (plugin == null)
-                        throw new Exception("Invalid plugin selected.");
+                        throw new Exception("选择的插件无效。");
 
                     // Allow the plugin to process the file..
                     if (plugin.CanProcessFile(this.InputFilePath))
-                        this.AddLogMessage(this, !plugin.ProcessFile(this.InputFilePath, this.Options) ? new LogMessageEventArgs("Failed to unpack file.", LogMessageType.Error) : new LogMessageEventArgs("Successfully unpacked file!", LogMessageType.Success));
+                        this.AddLogMessage(this, !plugin.ProcessFile(this.InputFilePath, this.Options) ? new LogMessageEventArgs("无法解包文件。", LogMessageType.Error) : new LogMessageEventArgs("文件解包成功！", LogMessageType.Success));
                     else
-                        this.AddLogMessage(this, new LogMessageEventArgs("Failed to unpack file.", LogMessageType.Error));
+                        this.AddLogMessage(this, new LogMessageEventArgs("无法解包文件。", LogMessageType.Error));
                 }
                 catch (Exception ex)
                 {
-                    this.AddLogMessage(this, new LogMessageEventArgs("Caught unhandled exception trying to unpack file.", LogMessageType.Error));
-                    this.AddLogMessage(this, new LogMessageEventArgs("Exception:", LogMessageType.Error));
+                    this.AddLogMessage(this, new LogMessageEventArgs("尝试解包文件时发生未处理的异常。", LogMessageType.Error));
+                    this.AddLogMessage(this, new LogMessageEventArgs("异常:", LogMessageType.Error));
                     this.AddLogMessage(this, new LogMessageEventArgs(ex.Message, LogMessageType.Error));
                 }
             });

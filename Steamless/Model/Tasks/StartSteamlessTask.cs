@@ -35,7 +35,7 @@ namespace Steamless.Model.Tasks
         /// </summary>
         public StartSteamlessTask()
         {
-            this.Text = "Starting Steamless...";
+            this.Text = "正在启动 Steamless ...";
         }
 
         /// <summary>

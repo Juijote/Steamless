@@ -143,35 +143,35 @@ namespace Steamless.Unpacker.Variant21.x86
                 return false;
 
             // Announce we are being unpacked with this packer..
-            this.Log("File is packed with SteamStub Variant 2.1!", LogMessageType.Information);
+            this.Log("该文件包含 SteamStub Variant 2.1!", LogMessageType.Information);
 
-            this.Log("Step 1 - Read, disassemble and decode the SteamStub DRM header.", LogMessageType.Information);
+            this.Log("步骤 1 - 读取、反汇编并解码 SteamStub DRM 标头。", LogMessageType.Information);
             if (!this.Step1())
                 return false;
 
-            this.Log("Step 2 - Read, decode and process the payload data.", LogMessageType.Information);
+            this.Log("步骤 2 - 读取、解码和处理有效内容数据。", LogMessageType.Information);
             if (!this.Step2())
                 return false;
 
-            this.Log("Step 3 - Read, decode and dump the SteamDRMP.dll file.", LogMessageType.Information);
+            this.Log("步骤 3 - 读取、解码并转存 SteamDRMP.dll 文件。", LogMessageType.Information);
             if (!this.Step3())
                 return false;
 
-            this.Log("Step 4 - Scan, dump and pull needed offsets from within the SteamDRMP.dll file.", LogMessageType.Information);
+            this.Log("步骤 4 - 从 SteamDRMP.dll 文件中扫描、转储和提取所需的偏移量。", LogMessageType.Information);
             if (!this.Step4())
                 return false;
 
-            this.Log("Step 5 - Read, decrypt and process the main code section.", LogMessageType.Information);
+            this.Log("步骤 5 - 读取、解密并处理主代码部分。", LogMessageType.Information);
             if (!this.Step5())
                 return false;
 
-            this.Log("Step 6 - Rebuild and save the unpacked file.", LogMessageType.Information);
+            this.Log("步骤 6 - 重建并保存解包文件。", LogMessageType.Information);
             if (!this.Step6())
                 return false;
 
             if (this.Options.RecalculateFileChecksum)
             {
-                this.Log("Step 7 - Rebuild unpacked file checksum.", LogMessageType.Information);
+                this.Log("步骤 7 - 重建解包文件校验码。", LogMessageType.Information);
                 if (!this.Step7())
                     return false;
             }
@@ -230,7 +230,7 @@ namespace Steamless.Unpacker.Variant21.x86
         /// <summary>
         /// Step #2
         /// 
-        /// Read, decode and process the payload data.
+        /// 读取、解码和处理有效内容数据。
         /// </summary>
         /// <returns></returns>
         private bool Step2()
@@ -249,7 +249,7 @@ namespace Steamless.Unpacker.Variant21.x86
                 if (this.Options.DumpPayloadToDisk)
                 {
                     System.IO.File.WriteAllBytes(this.File.FilePath + ".payload", payloadData);
-                    this.Log(" --> Saved payload to disk!", LogMessageType.Debug);
+                    this.Log(" --> 已将有效内容另存！", LogMessageType.Debug);
                 }
             }
             catch
@@ -263,12 +263,12 @@ namespace Steamless.Unpacker.Variant21.x86
         /// <summary>
         /// Step #3
         /// 
-        /// Read, decode and dump the SteamDRMP.dll file.
+        /// 读取、解码并转存 SteamDRMP.dll 文件。
         /// </summary>
         /// <returns></returns>
         private bool Step3()
         {
-            this.Log(" --> File has SteamDRMP.dll file!", LogMessageType.Debug);
+            this.Log(" --> 文件中包含 SteamDRMP.dll 文件！", LogMessageType.Debug);
 
             try
             {
@@ -293,7 +293,7 @@ namespace Steamless.Unpacker.Variant21.x86
                     {
                         var basePath = Path.GetDirectoryName(this.File.FilePath) ?? string.Empty;
                         System.IO.File.WriteAllBytes(Path.Combine(basePath, "SteamDRMP.dll"), drmpData);
-                        this.Log(" --> Saved SteamDRMP.dll to disk!", LogMessageType.Debug);
+                        this.Log(" --> 已将 SteamDRMP.dll 另存！", LogMessageType.Debug);
                     }
                 }
                 catch
@@ -305,7 +305,7 @@ namespace Steamless.Unpacker.Variant21.x86
             }
             catch
             {
-                this.Log(" --> Error trying to decrypt the files SteamDRMP.dll data!", LogMessageType.Error);
+                this.Log(" --> 尝试解密文件 SteamDRMP.dll 数据时出错！", LogMessageType.Error);
                 return false;
             }
         }
@@ -313,7 +313,7 @@ namespace Steamless.Unpacker.Variant21.x86
         /// <summary>
         /// Step #4
         /// 
-        /// Scan, dump and pull needed offsets from within the SteamDRMP.dll file.
+        /// 从 SteamDRMP.dll 文件中扫描、转储和提取所需的偏移量。
         /// </summary>
         /// <returns></returns>
         private bool Step4()
@@ -354,7 +354,7 @@ namespace Steamless.Unpacker.Variant21.x86
         /// <summary>
         /// Step #5
         /// 
-        /// Read, decrypt and process the main code section.
+        /// 读取、解密并处理主代码部分。
         /// </summary>
         /// <returns></returns>
         private bool Step5()
@@ -375,10 +375,10 @@ namespace Steamless.Unpacker.Variant21.x86
                 ntHeaders.FileHeader.NumberOfSections--;
                 this.File.NtHeaders = ntHeaders;
 
-                this.Log(" --> .bind section was removed from the file.", LogMessageType.Debug);
+                this.Log(" --> .bind 部分已从文件中删除。", LogMessageType.Debug);
             }
             else
-                this.Log(" --> .bind section was kept in the file.", LogMessageType.Debug);
+                this.Log(" --> .bind 部分保留在文件中。", LogMessageType.Debug);
 
             byte[] codeSectionData;
 
@@ -390,7 +390,7 @@ namespace Steamless.Unpacker.Variant21.x86
                     return false;
             }
 
-            this.Log($" --> {mainSection.SectionName} linked as main code section.", LogMessageType.Debug);
+            this.Log($" --> {mainSection.SectionName} 作为主要代码部分链接。", LogMessageType.Debug);
 
             // Save the code section index for later use..
             this.CodeSectionIndex = this.File.GetSectionIndex(mainSection);
@@ -407,7 +407,7 @@ namespace Steamless.Unpacker.Variant21.x86
             }
             else
             {
-                this.Log($" --> {mainSection.SectionName} section is encrypted.", LogMessageType.Debug);
+                this.Log($" --> {mainSection.SectionName} 部分已加密。", LogMessageType.Debug);
 
                 try
                 {
@@ -443,7 +443,7 @@ namespace Steamless.Unpacker.Variant21.x86
         /// <summary>
         /// Step #6
         /// 
-        /// Rebuild and save the unpacked file.
+        /// 重建并保存解包文件。
         /// </summary>
         /// <returns></returns>
         private bool Step6()
@@ -513,14 +513,14 @@ namespace Steamless.Unpacker.Variant21.x86
                 if (this.File.OverlayData != null)
                     fStream.WriteBytes(this.File.OverlayData);
 
-                this.Log(" --> Unpacked file saved to disk!", LogMessageType.Success);
-                this.Log($" --> File Saved As: {unpackedPath}", LogMessageType.Success);
+                this.Log(" --> 解包文件已另存！", LogMessageType.Success);
+                this.Log($" --> 文件另存为: {unpackedPath}", LogMessageType.Success);
 
                 return true;
             }
             catch
             {
-                this.Log(" --> Error trying to save unpacked file!", LogMessageType.Error);
+                this.Log(" --> 另存解包文件时出错！", LogMessageType.Error);
                 return false;
             }
             finally
@@ -540,11 +540,11 @@ namespace Steamless.Unpacker.Variant21.x86
             var unpackedPath = this.File.FilePath + ".unpacked.exe";
             if (!Pe32Helpers.UpdateFileChecksum(unpackedPath))
             {
-                this.Log(" --> Error trying to recalculate unpacked file checksum!", LogMessageType.Error);
+                this.Log(" --> 重新计算解包文件校验码时出错！", LogMessageType.Error);
                 return false;
             }
 
-            this.Log(" --> Unpacked file updated with new checksum!", LogMessageType.Success);
+            this.Log(" --> 解包文件已更新校验码！", LogMessageType.Success);
             return true;
 
         }

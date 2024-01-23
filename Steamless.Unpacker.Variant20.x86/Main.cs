@@ -141,27 +141,27 @@ namespace Steamless.Unpacker.Variant20.x86
                 return false;
 
             // Announce we are being unpacked with this packer..
-            this.Log("File is packed with SteamStub Variant 2.0!", LogMessageType.Information);
+            this.Log("该文件包含 SteamStub Variant 2.0!", LogMessageType.Information);
 
-            this.Log("Step 1 - Read, disassemble and decode the SteamStub DRM header.", LogMessageType.Information);
+            this.Log("步骤 1 - 读取、反汇编并解码 SteamStub DRM 标头。", LogMessageType.Information);
             if (!this.Step1())
                 return false;
 
-            this.Log("Step 2 - Read, decrypt and process the main code section.", LogMessageType.Information);
+            this.Log("步骤 2 - 读取、解密并处理主代码部分。", LogMessageType.Information);
             if (!this.Step2())
                 return false;
 
-            this.Log("Step 3 - Prepare the file sections.", LogMessageType.Information);
+            this.Log("步骤 3 - 准备文件部分。", LogMessageType.Information);
             if (!this.Step3())
                 return false;
 
-            this.Log("Step 4 - Rebuild and save the unpacked file.", LogMessageType.Information);
+            this.Log("步骤 4 - 重建并保存解包后的文件。", LogMessageType.Information);
             if (!this.Step4())
                 return false;
 
             if (this.Options.RecalculateFileChecksum)
             {
-                this.Log("Step 5 - Rebuild unpacked file checksum.", LogMessageType.Information);
+                this.Log("步骤 5 - 重建解包文件校验码。", LogMessageType.Information);
                 if (!this.Step5())
                     return false;
             }
@@ -224,7 +224,7 @@ namespace Steamless.Unpacker.Variant20.x86
         /// <summary>
         /// Step #2
         /// 
-        /// Read, decrypt and process the main code section.
+        /// 读取、解密并处理主代码部分。
         /// </summary>
         /// <returns></returns>
         private bool Step2()
@@ -310,10 +310,10 @@ namespace Steamless.Unpacker.Variant20.x86
                 ntHeaders.FileHeader.NumberOfSections--;
                 this.File.NtHeaders = ntHeaders;
 
-                this.Log(" --> .bind section was removed from the file.", LogMessageType.Debug);
+                this.Log(" --> .bind 部分已从文件中删除。", LogMessageType.Debug);
             }
             else
-                this.Log(" --> .bind section was kept in the file.", LogMessageType.Debug);
+                this.Log(" --> .bind 部分保留在文件中。", LogMessageType.Debug);
 
             try
             {
@@ -332,7 +332,7 @@ namespace Steamless.Unpacker.Variant20.x86
         /// <summary>
         /// Step #4
         /// 
-        /// Rebuild and save the unpacked file.
+        /// 重建并保存解包文件。
         /// </summary>
         /// <returns></returns>
         private bool Step4()
@@ -398,14 +398,14 @@ namespace Steamless.Unpacker.Variant20.x86
                 if (this.File.OverlayData != null)
                     fStream.WriteBytes(this.File.OverlayData);
 
-                this.Log(" --> Unpacked file saved to disk!", LogMessageType.Success);
-                this.Log($" --> File Saved As: {unpackedPath}", LogMessageType.Success);
+                this.Log(" --> 解包文件已另存！", LogMessageType.Success);
+                this.Log($" --> 文件另存为: {unpackedPath}", LogMessageType.Success);
 
                 return true;
             }
             catch
             {
-                this.Log(" --> Error trying to save unpacked file!", LogMessageType.Error);
+                this.Log(" --> 另存解包文件时出错！", LogMessageType.Error);
                 return false;
             }
             finally
@@ -425,11 +425,11 @@ namespace Steamless.Unpacker.Variant20.x86
             var unpackedPath = this.File.FilePath + ".unpacked.exe";
             if (!Pe32Helpers.UpdateFileChecksum(unpackedPath))
             {
-                this.Log(" --> Error trying to recalculate unpacked file checksum!", LogMessageType.Error);
+                this.Log(" --> 重新计算解包文件校验码时出错！", LogMessageType.Error);
                 return false;
             }
 
-            this.Log(" --> Unpacked file updated with new checksum!", LogMessageType.Success);
+            this.Log(" --> 解包文件已更新校验码！", LogMessageType.Success);
             return true;
 
         }

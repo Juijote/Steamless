@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 
 [assembly: AssemblyTitle("Steamless")]
-[assembly: AssemblyDescription("Removes the SteamStub DRM protection from Steam applications.")]
+[assembly: AssemblyDescription("从 Steam 应用程序中删除 SteamStub DRM 保护。")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("atom0s")]
 [assembly: AssemblyProduct("Steamless")]

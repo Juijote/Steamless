@@ -771,7 +771,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Width="600" Header="MESSAGE">
+                    <GridViewColumn Width="600" Header="信息">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid HorizontalAlignment="Left" VerticalAlignment="Center">

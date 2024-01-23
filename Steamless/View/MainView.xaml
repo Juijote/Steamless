@@ -42,7 +42,7 @@
         </Grid.RowDefinitions>
 
         <!-- File Selection -->
-        <GroupBox Grid.Row="0" Margin="10" Header="1. Select File To Unpack">
+        <GroupBox Grid.Row="0" Margin="10" Header="1. 选择要解包的文件">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -66,7 +66,7 @@
         </GroupBox>
 
         <!-- Plugin Selection -->
-        <GroupBox Grid.Row="1" Margin="10,0,10,10" Header="2. Select Plugin">
+        <GroupBox Grid.Row="1" Margin="10,0,10,10" Header="2. 选择插件">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -76,7 +76,7 @@
         </GroupBox>
 
         <!-- Unpacking Options -->
-        <GroupBox Grid.Row="2" Margin="10,0,10,10" Header="3. Unpacking Options" DataContext="{Binding MainWindow, Source={StaticResource ViewModelLocator}}">
+        <GroupBox Grid.Row="2" Margin="10,0,10,10" Header="3. 解包参数" DataContext="{Binding MainWindow, Source={StaticResource ViewModelLocator}}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -88,14 +88,14 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <CheckBox Grid.Row="0" Content="Verbose Output" Margin="2" ToolTip="If enabled, Steamless will allow logging of debug messages." IsChecked="{Binding Options.VerboseOutput}" />
-                <CheckBox Grid.Row="1" Content="Keep Bind Section" Margin="2" ToolTip="The bind section should be kept within the file after unpacking." IsChecked="{Binding Options.KeepBindSection}" />
-                <CheckBox Grid.Row="2" Content="Dump Payload To Disk" Margin="2" ToolTip="Dumps the payload to disk where the target file is located. (File will be saved with the .payload extension.)" IsChecked="{Binding Options.DumpPayloadToDisk}" />
-                <CheckBox Grid.Row="3" Content="Dump SteamDRMP.dll To Disk" Margin="2" ToolTip="Dumps the SteamDRMP.dll to disk where the target file is located." IsChecked="{Binding Options.DumpSteamDrmpToDisk}" />
-                <CheckBox Grid.Row="4" Content="Use Experimental Features" Margin="2" ToolTip="Enables the use of experimental features." IsChecked="{Binding Options.UseExperimentalFeatures}" />
-                <CheckBox Grid.Row="5" Content="Don't Realign Sections" Margin="2" ToolTip="Disables realignment of sections when unpacking." IsChecked="{Binding Options.DontRealignSections}" />
-                <CheckBox Grid.Row="6" Content="Zero DOS Stub Data" Margin="2" ToolTip="Sets the DOS stub data to 00's." IsChecked="{Binding Options.ZeroDosStubData}" />
-                <CheckBox Grid.Row="7" Content="Recalculate File Checksum" Margin="2" ToolTip="Recalculates the file checksum in the unpacked file." IsChecked="{Binding Options.RecalculateFileChecksum}" />
+                <CheckBox Grid.Row="0" Content="信息输出" Margin="2" ToolTip="如果启用，Steamless 将允许记录调试消息。" IsChecked="{Binding Options.VerboseOutput}" />
+                <CheckBox Grid.Row="1" Content="保留 DRM 相关内容" Margin="2" ToolTip="解包后，DRM 相关内容依然会保留在文件中。" IsChecked="{Binding Options.KeepBindSection}" />
+                <CheckBox Grid.Row="2" Content="另存有效内容" Margin="2" ToolTip="将有效内容另存到目标文件所在的位置，(文件以 .payload 后缀保存）。" IsChecked="{Binding Options.DumpPayloadToDisk}" />
+                <CheckBox Grid.Row="3" Content="另存 SteamDRMP.dll" Margin="2" ToolTip="将 SteamDRMP.dll 另存到目标文件所在位置。" IsChecked="{Binding Options.DumpSteamDrmpToDisk}" />
+                <CheckBox Grid.Row="4" Content="使用实验性功能" Margin="2" ToolTip="允许使用实验性功能。" IsChecked="{Binding Options.UseExperimentalFeatures}" />
+                <CheckBox Grid.Row="5" Content="不要重新调整内容" Margin="2" ToolTip="在解包时禁用各部分内容的重新调整。" IsChecked="{Binding Options.DontRealignSections}" />
+                <CheckBox Grid.Row="6" Content="零 DOS 存根数据" Margin="2" ToolTip="将 DOS 存根数据设为 00's." IsChecked="{Binding Options.ZeroDosStubData}" />
+                <CheckBox Grid.Row="7" Content="重新计算文件校验码" Margin="2" ToolTip="重新计算解包文件的校验码。" IsChecked="{Binding Options.RecalculateFileChecksum}" />
             </Grid>
         </GroupBox>
 
@@ -103,7 +103,7 @@
         <GroupBox Grid.Row="3" Margin="10,0,10,10">
             <GroupBox.Header>
                 <Grid HorizontalAlignment="Stretch" Width="{Binding RelativeSource={RelativeSource AncestorType={x:Type GroupBox}}, Path=ActualWidth}">
-                    <Label Content="Log" Foreground="#A8A8A8" FontWeight="Bold" Margin="0" Padding="0" />
+                    <Label Content="日志" Foreground="#A8A8A8" FontWeight="Bold" Margin="0" Padding="0" />
                     <Label Foreground="#A8A8A8" FontWeight="Bold" Margin="0" Padding="0" HorizontalAlignment="Right">
                         <Label.Style>
                             <Style TargetType="Label">
@@ -115,7 +115,7 @@
                                 </Style.Triggers>
                             </Style>
                         </Label.Style>
-                        <Hyperlink NavigateUri="http://atom0s.com/" Foreground="#A8A8A8">Clear Log
+                        <Hyperlink NavigateUri="http://atom0s.com/" Foreground="#A8A8A8">清除日志
                             <Hyperlink.TextDecorations>
                                 <TextDecorationCollection>
                                     <TextDecoration PenThicknessUnit="FontRecommended" PenOffset="1">
@@ -143,7 +143,7 @@
 
         <!-- Unpack Button -->
         <Grid Grid.Row="4" Margin="8" Background="Transparent" SnapsToDevicePixels="True">
-            <Button Content="Unpack File" Width="125" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding MainWindow.OnUnpackFileCommand, Source={StaticResource ViewModelLocator}}" />
+            <Button Content="开始解包文件" Width="125" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding MainWindow.OnUnpackFileCommand, Source={StaticResource ViewModelLocator}}" />
         </Grid>
     </Grid>
 </UserControl>

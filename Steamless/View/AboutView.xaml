@@ -172,6 +172,43 @@
                             </i:Interaction.Triggers>
                         </Hyperlink>
                     </Label>
+                    <BulletDecorator HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <BulletDecorator.Bullet>
+                            <Ellipse Height="3" Width="3" Fill="White" Margin="2" />
+                        </BulletDecorator.Bullet>
+                    </BulletDecorator>
+                    <Label Margin="2">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Background" Value="#0F000000" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                        <Hyperlink NavigateUri="https://juij.eu.org/#Steamless" Foreground="#c0dd65">汉化更新下载
+                            <Hyperlink.TextDecorations>
+                                <TextDecorationCollection>
+                                    <TextDecoration PenThicknessUnit="FontRecommended" PenOffset="3">
+                                        <TextDecoration.Pen>
+                                            <Pen Thickness="2" Brush="#88A825">
+                                                <Pen.DashStyle>
+                                                    <DashStyle Dashes="2"/>
+                                                </Pen.DashStyle>
+                                            </Pen>
+                                        </TextDecoration.Pen>
+                                    </TextDecoration>
+                                </TextDecorationCollection>
+                            </Hyperlink.TextDecorations>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="RequestNavigate">
+                                    <i:InvokeCommandAction Command="{Binding Path=MainWindow.OnOpenHyperlinkCommand, Source={StaticResource ViewModelLocator}}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Hyperlink}}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Hyperlink>
+                    </Label>
                 </StackPanel>
             </Border>
         </Border>
@@ -185,7 +222,7 @@
                 </Style>
                 <Style BasedOn="{StaticResource StackPanelLabelCenter}" TargetType="{x:Type Label}" />
             </StackPanel.Resources>
-            <Label Content="Donations" FontSize="18" FontWeight="Bold" Margin="0" Padding="0" />
+            <Label Content="捐赠" FontSize="18" FontWeight="Bold" Margin="0" Padding="0" />
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label ToolTip="Donate via Paypal" Width="18" Height="18" Background="#0689c1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -279,9 +316,10 @@
                     </Style>
                     <Style BasedOn="{StaticResource StackPanelLabelCenter}" TargetType="{x:Type Label}" />
                 </StackPanel.Resources>
-                <Label Content="Credits" FontSize="18" FontWeight="Bold" />
+                <Label Content="制作人员" FontSize="18" FontWeight="Bold" />
                 <Label Content="atom0s - Lead Developer" Foreground="#c0dd65" />
                 <Label Content="Cyanic (aka Golem_x86) - For his work / research." />
+                <Label Content="Juij - 汉化翻译" />
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0">
                 <StackPanel.Resources>
@@ -325,7 +363,7 @@
                     </StackPanel.Resources>
 
                     <!-- Donation Information -->
-                    <Label Content="Donations" Style="{StaticResource LegalInformationLabelHeader}" />
+                    <Label Content="捐赠" Style="{StaticResource LegalInformationLabelHeader}" />
                     <TextBlock>
                             Steamless is provided, as-is, for free. Donations are a way for users to show their support for my work.
                             I do not accept donations in the attempt to assist with pirating games or other illegal activities. Do
@@ -363,6 +401,6 @@
         </Border>
 
         <!-- Close Button -->
-        <Button Grid.Row="5" Content="Close" Width="125" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding MainWindow.OnShowAboutViewCommand, Source={StaticResource ViewModelLocator}}" />
+        <Button Grid.Row="5" Content="关闭" Width="125" Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding MainWindow.OnShowAboutViewCommand, Source={StaticResource ViewModelLocator}}" />
     </Grid>
 </UserControl>
