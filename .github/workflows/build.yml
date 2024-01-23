@@ -17,9 +17,8 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.0.0
 
-    - name: Build Software
-      run: |
-        msbuild /p:Configuration=Release /m
+    - name: Build Solution
+      run: msbuild /p:Configuration=Release /m /p:Platform="Any CPU" Steamless.sln
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
